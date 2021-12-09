@@ -18,7 +18,7 @@ const renderCalender = () => {
     const nextDays = 7 - lastDayIndex - 1;
 
 
-    const event = [[16, 09, 2021, ["Rahul Kumar-->", "Birthday", "Vijay kumar-->", "Birthday"]], [03, 00, 2022, ["Vijay Kumar", "Clg reporting"]], [25, 11, 2021, ["whole society", "christmas"]]];
+    const event = [[16, 09, 2021,"Rahul Kumar--> Birthday , Vijay kumar--> Birthday"], [03, 00, 2022, "Vijay kumar --> clg going"], [09, 11, 2021, "whole society--> Christmas"]];
 
     const months = [
         "January",
@@ -51,13 +51,31 @@ const renderCalender = () => {
     let index;
     for (let i = 1; i <= lastDay; i++) {
         if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-            days += `<div class="today">${i}</div>`;
+            let flag = 1;
+            for (let x = 0; x < event.length; x++) {
+                if (i === event[x][0] && date.getMonth() === event[x][1] && date.getFullYear() === event[x][2]) {
+                    let str=String(event[x][3]);
+                    // let v=typeof(str);
+                    let count=(str.match(/-->/g)).length;
+                    days += `<div class="today">${i}<button id="show">E${count}</button></div>`;
+                    index = x;
+                    flag = 0;
+                    // console.log("Hello world!");
+                }
+            }
+            if (flag) {
+                days += `<div class="today">${i}</div>`;
+            }
+            // days += `<div class="today">${i}</div>`;
         }
         else {
             let flag = 1;
-            for (let x = 0; x < 3; x++) {
+            for (let x = 0; x < event.length; x++) {
                 if (i === event[x][0] && date.getMonth() === event[x][1] && date.getFullYear() === event[x][2]) {
-                    days += `<div class="eventtoday">${i}<button id="show">E</button></div>`;
+                    let str=String(event[x][3]);
+                    // let v=typeof(str);
+                    let count=(str.match(/-->/g)).length;
+                    days += `<div class="eventtoday">${i}<button id="show">E${count}</button></div>`;
                     index = x;
                     let flag = 0;
                     // console.log("Hello world!");

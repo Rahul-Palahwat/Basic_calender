@@ -129,3 +129,6 @@ html{
 .eventtoday{
     background-color: rgb(255, 0, 0);
 }
+#show{
+    margin-left: 8px;
+}
