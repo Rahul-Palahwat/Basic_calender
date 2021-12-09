@@ -17,6 +17,9 @@ const renderCalender = () => {
 
     const nextDays = 7 - lastDayIndex - 1;
 
+
+    const event = [[16, 09, 2021, ["Rahul Kumar-->", "Birthday", "Vijay kumar-->", "Birthday"]], [03, 00, 2022, ["Vijay Kumar", "Clg reporting"]], [25, 11, 2021, ["whole society", "christmas"]]];
+
     const months = [
         "January",
         "February",
@@ -44,12 +47,26 @@ const renderCalender = () => {
         days += `<div class="prev-date">${prevLastDay - x + 1}</div>`
     }
 
+
+    let index;
     for (let i = 1; i <= lastDay; i++) {
         if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
             days += `<div class="today">${i}</div>`;
         }
         else {
-            days += `<div>${i}</div>`;
+            let flag = 1;
+            for (let x = 0; x < 3; x++) {
+                if (i === event[x][0] && date.getMonth() === event[x][1] && date.getFullYear() === event[x][2]) {
+                    days += `<div class="eventtoday">${i}<button id="show">E</button></div>`;
+                    index = x;
+                    let flag = 0;
+                    // console.log("Hello world!");
+                }
+            }
+            if (flag) {
+                days += `<div>${i}</div>`;
+            }
+
         }
     }
 
@@ -57,6 +74,11 @@ const renderCalender = () => {
         days += `<div class="next-date">${j}</div>`
         monthDays.innerHTML = days;
     }
+    let ev = document.getElementById("show");
+    ev.addEventListener('click', () => {
+        window.alert(event[index][3]);
+        // window.alert("Hello");
+    })
 
 }
 
