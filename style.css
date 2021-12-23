@@ -126,3 +126,9 @@ html{
 .today{
     background-color: #167e56;
 }
+.eventtoday{
+    background-color: rgb(255, 0, 0);
+}
+#show{
+    margin-left: 8px;
+}
